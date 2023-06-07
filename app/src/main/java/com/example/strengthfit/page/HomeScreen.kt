@@ -22,35 +22,50 @@ fun HomeScreen() {
         modifier = Modifier
             .fillMaxSize()
             .padding(dp16),
-        topBar = {
-            TopAppBar(
-                navigationIcon = {
-                    IconButton(
-                        onClick = { }
-                    ) {
-                        Icon(imageVector = Icons.Rounded.Menu, contentDescription = "Drawer Icon")
-                    }
-                },
-                title = {
-                    Text(
-                        text = "StrengthFit",
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        textAlign = TextAlign.Center,
-                        )
-                },
-                actions = {
-                    Box(
-                        modifier = Modifier
-                            .size(80.dp)
-                            .background(color = Color.Gray)
-                    )
+        topBar = { TopAppBarContent() },
+        bottomBar = {},
+        content = { it -> ScaffoldContent(it)}
+    )
+}
+
+
+
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopAppBarContent(){
+    TopAppBar(
+        navigationIcon = {
+            IconButton(
+                onClick = {
+
                 }
+            ) {
+                Icon(imageVector = Icons.Rounded.Menu, contentDescription = "Drawer Icon")
+            }
+        },
+        title = {
+            Text(
+                text = "StrengthFit",
+                modifier = Modifier
+                    .fillMaxWidth(),
+                textAlign = TextAlign.Center,
             )
         },
-        bottomBar = {
+        actions = {
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .background(color = Color.Gray)
+            )
         }
-    ) {
-        Text(text = "Hello")
-    }
+    )
+}
+
+@Composable
+fun ScaffoldContent(paddingValues: PaddingValues) {
+    Text(text = "Hello",
+        modifier = Modifier.padding(paddingValues)
+        )
 }
