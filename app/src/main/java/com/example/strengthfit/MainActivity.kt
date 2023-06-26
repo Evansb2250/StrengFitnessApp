@@ -30,10 +30,12 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.strengthfit.components.topBar.SFTopBar
 import com.example.strengthfit.constants.appTitle
-import com.example.strengthfit.page.ExerciseScreen
-import com.example.strengthfit.page.FavoriteScreen
-import com.example.strengthfit.page.HomeScreen
-import com.example.strengthfit.page.ProfileScreen
+import com.example.strengthfit.screens.ExerciseScreen
+import com.example.strengthfit.screens.FavoriteScreen
+import com.example.strengthfit.screens.HomeScreen
+import com.example.strengthfit.screens.ProfileScreen
+import com.example.strengthfit.screens.LoginScreen
+import com.example.strengthfit.screens.SignUpScreen
 import com.example.strengthfit.ui.theme.StrengthFitTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -44,24 +46,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             StrengthFitTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                ) {
-                    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-                    val scope = rememberCoroutineScope()
-                    val navHostController = rememberNavController()
-                    ModalNavigationDrawer(
-                        drawerState = drawerState,
-                        drawerContent = { DrawerSheetContent() },
-                        content = {
-                            SFScaffold(
-                                drawerState = drawerState,
-                                scope = scope,
-                                navController = navHostController
-                            )
-                        }
-                    )
+                Surface() {
+                    AppStartUp()
                 }
             }
         }
@@ -95,6 +81,53 @@ fun ProfileImage(
             }
         )
     }
+}
+
+@Composable
+fun LoginNavigation(
+    navController: NavHostController
+){
+    NavHost(navController = navController, startDestination = "loginScreen") {
+        composable(
+            route = "SplashScreen"
+        ) {
+
+        }
+
+        composable(
+            route = "loginScreen"
+        ) {
+            LoginScreen(
+                navigateToHomePage = { userName ->
+                    HomeScreenNavigation(
+                        userId = userName
+                    )
+                },
+                onSignUp = {
+                    navController.navigate("SignUpScreen")
+                }
+            )
+        }
+
+        composable(
+            route = "SignUpScreen"
+        ) {
+            SignUpScreen{
+                navController.navigate("loginScreen"){
+                    popUpTo("loginScreen"){
+                        inclusive = true
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun AppStartUp(
+) {
+    val navHostController = rememberNavController()
+    LoginNavigation(navController = navHostController)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -223,19 +256,19 @@ fun Navigation(
 
         composable(
             route = "Favorite"
-        ){
+        ) {
             FavoriteScreen(paddingValues = paddingValues)
         }
 
         composable(
             route = "Exercise"
-        ){
+        ) {
             ExerciseScreen(paddingValues = paddingValues)
         }
 
         composable(
             route = "Profile"
-        ){
+        ) {
             ProfileScreen(paddingValues = paddingValues)
         }
     }
@@ -300,6 +333,33 @@ fun BottomNavigation(
                 .selectableGroup(),
             horizontalArrangement = Arrangement.SpaceBetween,
             content = content
+        )
+    }
+}
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun HomeScreenNavigation(
+    userId: String,
+) {
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+    ) {
+        val navHostController: NavHostController = rememberNavController()
+        val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+        val scope = rememberCoroutineScope()
+
+        ModalNavigationDrawer(
+            drawerState = drawerState,
+            drawerContent = { DrawerSheetContent() },
+            content = {
+                SFScaffold(
+                    drawerState = drawerState,
+                    scope = scope,
+                    navController = navHostController
+                )
+            }
         )
     }
 }

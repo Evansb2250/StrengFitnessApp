@@ -1,4 +1,4 @@
-package com.example.strengthfit.pixels
+package com.example.strengthfit.constants.pixels
 
 import androidx.compose.ui.unit.dp
 

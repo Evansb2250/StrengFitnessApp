@@ -39,8 +39,6 @@ G.idea/sonarlint/issuestore/5/b/5bbfa66edb4db3c7c33c5181f43510990d3307f9,f\7\f7
 w
 G.idea/sonarlint/issuestore/0/5/05efc8b1657769a27696d478ded1e95f38737233,3\c\3c8c56407c35e5f5ebbd6c7250a79af8128a13a6
 w
-G.idea/sonarlint/issuestore/f/0/f07866736216be0ee2aba49e392191aeae700a35,b\f\bfb9453d49af9bc40f5f7a5f034be3c7ef8fa6bf
-w
 G.idea/sonarlint/issuestore/5/1/51e1c5d383dfaa35e0e7e5873a0a99355a86880f,3\1\31c4cd19c36ab63325379c8a050c1688b5493ffd
 w
 G.idea/sonarlint/issuestore/f/b/fbe448ebfc3eb2d4e308f6b8b043666f5b57235e,5\2\52114fdaa426e9b83a3c5df4e11c4f0ebbcd814b
@@ -56,9 +54,9 @@ w
 G.idea/sonarlint/issuestore/4/8/489e082e785a5baac1465e9a8d5b2cbe20432f86,e\d\ed2acb0770a84fac7cefc0d58e1c21fc084a3602
 w
 G.idea/sonarlint/issuestore/2/a/2afbb999f001938c88fa43fc2ef52abf0f8213e4,5\1\516e730a14e71f02fa73f3acd6dc7cea9a9fe002
-P
- app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
-Å
-Qapp/src/main/java/com/example/strengthfit/components/profileImage/ProfileImage.kt,6\a\6a120cb5ceccb0619e96ad36677620101e85a5c6
-ë
-aapp/src/main/java/com/example/strengthfit/components/navigationDrawer/StrengthFitnessNavDrawer.kt,c\d\cdef829724b19bb1a50a08378715240552209444
+w
+Gapp/src/main/java/com/example/strengthfit/components/topBar/SFTopBar.kt,4\b\4b27decbc5cf628cb556d5d8220646c95f33d528
+Ö
+Uapp/src/main/java/com/example/strengthfit/components/bottomBar/StrengthFitScaffold.kt,c\7\c72d70df0cade5cda2ec442853862e703e574ef3
+k
+;app/src/main/java/com/example/strengthfit/ui/theme/Theme.kt,4\8\489e082e785a5baac1465e9a8d5b2cbe20432f86
