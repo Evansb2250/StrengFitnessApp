@@ -85,7 +85,8 @@ fun ProfileImage(
 
 @Composable
 fun LoginNavigation(
-    navController: NavHostController
+    navController: NavHostController,
+    navigateToHomeScreen: (@Composable (String) -> Unit ),
 ){
     NavHost(navController = navController, startDestination = "loginScreen") {
         composable(
@@ -99,14 +100,16 @@ fun LoginNavigation(
         ) {
             LoginScreen(
                 navigateToHomePage = { userName ->
-                    HomeScreenNavigation(
-                        userId = userName
-                    )
-                },
+                    navigateToHomeScreen(userName)
+        },
                 onSignUp = {
                     navController.navigate("SignUpScreen")
                 }
             )
+        }
+
+        composable("HomeScreenNavigation/{email}"){
+
         }
 
         composable(
@@ -127,7 +130,13 @@ fun LoginNavigation(
 fun AppStartUp(
 ) {
     val navHostController = rememberNavController()
-    LoginNavigation(navController = navHostController)
+    LoginNavigation(
+        navController = navHostController
+    ){ userId ->
+        HomeScreenNavigation(
+            userId = userId
+        )
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

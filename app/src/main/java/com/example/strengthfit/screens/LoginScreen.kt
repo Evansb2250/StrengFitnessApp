@@ -16,7 +16,7 @@ fun LoginScreen(
     onSignUp: () -> Unit = {},
 ) {
     LoginScreenPage(
-        loginUiState = vm.state.collectAsState().value,
+        state = vm.state.collectAsState().value,
         onEmailChange = { email ->
             vm.updateEmail(email)
         },
@@ -24,6 +24,9 @@ fun LoginScreen(
             vm.updatePassword(password)
         },
         onSignUp = onSignUp,
-        onSubmit = { vm.submit() }
+        onSubmit = { email, password ->
+            vm.requestAccess(email, password)
+        },
+        onNavigateToHomePage = {}
     )
 }

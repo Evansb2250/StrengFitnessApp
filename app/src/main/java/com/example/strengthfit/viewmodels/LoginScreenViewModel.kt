@@ -4,39 +4,36 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.strengthfit.repo.UserRepository
 import com.example.strengthfit.stateModels.LoginViewModelState
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class LoginScreenViewModel(
     val userRepository: UserRepository,
     private val dispatcher: Dispatchers = Dispatchers
 ) : ViewModel() {
-    private val _state : MutableStateFlow<LoginViewModelState.LoginUiState> = MutableStateFlow(
-        LoginViewModelState.LoginUiState(
+    private val _state: MutableStateFlow<LoginViewModelState.LoginState> = MutableStateFlow(
+        LoginViewModelState.LoginState.LoginUiState(
             "",
             "",
             false,
         )
     )
-    val state: StateFlow<LoginViewModelState.LoginUiState> = _state
+    val state: StateFlow<LoginViewModelState.LoginState> = _state
 
     fun updateEmail(email: String) {
-         _state.update {
-            it.copy(
-                email = email
-            )
+        val currentState = _state.value
+        if (currentState is LoginViewModelState.LoginState.LoginUiState) {
+            _state.value = currentState.updateEmail(email)
         }
     }
 
-    fun updatePassword(password: String){
-        _state.update {
-            it.copy(
-                password = password
-            )
+    fun updatePassword(password: String) {
+        val currentState = _state.value
+        if (currentState is LoginViewModelState.LoginState.LoginUiState) {
+            _state.value = currentState.updatePassword(password)
         }
     }
 
@@ -44,21 +41,37 @@ class LoginScreenViewModel(
         userName: String,
         password: String,
     ) {
-        val results = viewModelScope.async {
-            userRepository.getUser(
+        viewModelScope.launch {
+            val result = userRepository.getUser(
                 userName,
                 password
             )
+
+            if (result != null) {
+                _state.value =   LoginViewModelState.LoginState.SuccessLoginUIState(result.email)
+
+            } else {
+                _state.value = LoginViewModelState.LoginState.ErrorUiState(FailedLoging)
+            }
         }
+
+
     }
 
-    fun submit() {
-      val result =  viewModelScope.async(dispatcher.IO) {
+    fun submit(
+        email: String,
+        password: String,
+    ) {
+        val result = viewModelScope.async(dispatcher.IO) {
             userRepository.getUser(
-                state.value.email,
-                state.value.password
+                email,
+                password,
             )
         }.onAwait
 
     }
 }
+
+
+object FailedLoging : Throwable()
+object IncorrectPath : Throwable()
