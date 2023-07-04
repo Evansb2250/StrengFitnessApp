@@ -20,7 +20,7 @@ import com.example.strengthfit.R
 fun SuccessDialog(
     onDismiss:() -> Unit = {},
 ){
-    StrengthFitDialogue(
+    CustomBaseDialog(
         onDismiss = onDismiss,
         content = {
             Column(

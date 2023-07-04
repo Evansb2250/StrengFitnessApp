@@ -41,14 +41,14 @@ class LoginScreenViewModel(
         userName: String,
         password: String,
     ) {
-        viewModelScope.launch {
+        viewModelScope.launch(dispatcher.IO) {
             val result = userRepository.getUser(
                 userName,
                 password
             )
 
             if (result != null) {
-                _state.value =   LoginViewModelState.LoginState.SuccessLoginUIState(result.email)
+                _state.value = LoginViewModelState.LoginState.SuccessLoginUIState(result.email)
 
             } else {
                 _state.value = LoginViewModelState.LoginState.ErrorUiState(FailedLoging)
@@ -69,6 +69,14 @@ class LoginScreenViewModel(
             )
         }.onAwait
 
+    }
+
+    fun resetState() {
+        _state.value = LoginViewModelState.LoginState.LoginUiState(
+            "",
+            "",
+            false,
+        )
     }
 }
 

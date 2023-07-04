@@ -21,7 +21,7 @@ fun FailureDialog(
     onCancel:() -> Unit = {},
     onRetry: () -> Unit = {},
 ){
-    StrengthFitDialogue(
+    CustomBaseDialog(
         onDismiss = onCancel,
         content = {
             Column(

@@ -13,6 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.example.strengthfit.components.CustomOutLineButton
+import com.example.strengthfit.components.dialogue.FailureDialog
+import com.example.strengthfit.components.textfield.PasswordOutLineTextField
 import com.example.strengthfit.preview.LoginPagePreviewProvider
 import com.example.strengthfit.stateModels.LoginViewModelState
 
@@ -25,11 +27,20 @@ fun LoginScreenPage(
     onPasswordChange: (String) -> Unit = {},
     onSignUp: () -> Unit = {},
     onSubmit: (email: String, password: String) -> Unit = { _, _ -> },
-    onNavigateToHomePage: (@Composable (String) -> Unit) -> Unit,
+    onNavigateToHomePage: (String) -> Unit = {},
+    onDismissError: () -> Unit = {},
 ) {
     when (state) {
-        is LoginViewModelState.LoginState.ErrorUiState -> TODO()
-        is LoginViewModelState.LoginState.SuccessLoginUIState -> TODO()
+        is LoginViewModelState.LoginState.ErrorUiState -> {
+            FailureDialog(
+                onRetry = onDismissError,
+            )
+        }
+
+        is LoginViewModelState.LoginState.SuccessLoginUIState -> {
+            onNavigateToHomePage(state.email)
+        }
+
         is LoginViewModelState.LoginState.LoginUiState -> {
             Column {
                 OutlinedTextField(
@@ -43,12 +54,9 @@ fun LoginScreenPage(
                     )
                 Spacer(modifier = Modifier.size(25.dp))
 
-                OutlinedTextField(
-                    modifier = Modifier.fillMaxWidth(),
+                PasswordOutLineTextField(
                     value = state.password,
-                    label = {
-                        Text(text = "Password")
-                    },
+                    labelText = "Password",
                     onValueChange = onPasswordChange,
                 )
 
@@ -76,7 +84,6 @@ fun LoginScreenPage(
                     buttonText = "Sign up"
                 )
             }
-
         }
     }
 }

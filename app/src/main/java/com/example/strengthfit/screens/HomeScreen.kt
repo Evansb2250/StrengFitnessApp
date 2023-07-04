@@ -7,28 +7,22 @@ import androidx.compose.ui.Modifier
 
 
 @Composable
-fun HomeScreen(
-    paddingValues: PaddingValues
-) {
+fun HomeScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .fillMaxWidth()
-            .padding(paddingValues),
     ){
         Text(text = "Hello World")
     }
 }
 
 @Composable
-fun FavoriteScreen(
-    paddingValues: PaddingValues
-) {
+fun FavoriteScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .fillMaxWidth()
-            .padding(paddingValues),
     ){
         Text(text = "Favorite Screen")
     }
@@ -36,13 +30,11 @@ fun FavoriteScreen(
 
 @Composable
 fun ExerciseScreen(
-    paddingValues: PaddingValues
 ) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .fillMaxWidth()
-            .padding(paddingValues),
     ){
         Text(text = "Exercise Screen")
     }
@@ -50,13 +42,11 @@ fun ExerciseScreen(
 
 @Composable
 fun ProfileScreen(
-    paddingValues: PaddingValues
 ) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .fillMaxWidth()
-            .padding(paddingValues),
     ){
         Text(text = "Profile Screen")
     }

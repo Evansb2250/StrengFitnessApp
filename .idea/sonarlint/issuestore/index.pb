@@ -54,8 +54,6 @@ w
 G.idea/sonarlint/issuestore/4/8/489e082e785a5baac1465e9a8d5b2cbe20432f86,e\d\ed2acb0770a84fac7cefc0d58e1c21fc084a3602
 w
 G.idea/sonarlint/issuestore/2/a/2afbb999f001938c88fa43fc2ef52abf0f8213e4,5\1\516e730a14e71f02fa73f3acd6dc7cea9a9fe002
-w
-Gapp/src/main/java/com/example/strengthfit/components/topBar/SFTopBar.kt,4\b\4b27decbc5cf628cb556d5d8220646c95f33d528
 …
 Uapp/src/main/java/com/example/strengthfit/components/bottomBar/StrengthFitScaffold.kt,c\7\c72d70df0cade5cda2ec442853862e703e574ef3
 k
